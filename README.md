@@ -11,7 +11,7 @@ At present the [cloud-platform-environments] repository requires a Cloud Platfor
 
 ### Proposed Workflow
 
-![workflow diagram]()
+![workflow diagram](https://raw.githubusercontent.com/ministryofjustice/cloud-platform-directory-hash/main/docs/workflow.drawio)
 
 
 [create a repository]: https://github.com/ministryofjustice/template-repository/generate

@@ -18,7 +18,7 @@ Using a combination of the [cloud-platform-cli], a [GitHub action] and the Go ap
 
 This diagram shows a simple workflow to address the problem:
 
-![workflow diagram](https://raw.githubusercontent.com/ministryofjustice/cloud-platform-directory-hash/main/docs/workflow.png)
+![workflow diagram](https://raw.githubusercontent.com/ministryofjustice/cloud-platform-directory-hash/main/docs/workflow2.png)
 
 1. It was decided very early on, the best way to ensure the integrity of a newly created namespace was to form a hash of its contents. This hash would then need to be passed to a PR and some further logic would apply to confirm its validity. Because the Cloud Platform team have already created a command line interface (CLI) tool to template onboarding to the platform, it became evident that the initial hash upon creation should be performed by this tool. The hash would then be added to the PR via an artefact in the root of the [cloud-platform-environment] repository.
 

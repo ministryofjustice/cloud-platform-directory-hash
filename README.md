@@ -3,7 +3,6 @@
 ## Table of Contents
 - [Overview]
 - [Installation]
-- [Usage]
 - [Develop]
 
 ## Overview
@@ -44,9 +43,21 @@ The tool was designed for use in a [GitHub action]. To execute you must be insid
 go get github.com/ministryofjustice/cloud-platform-directory-hash/cmd/directory-hash@main
 ```
 
+## Develop
+
+You will need golang installed (version 1.14 or greater)
+
+### cmd/directory-hash
+
+This is the main function for the `directory-hash` application.
+
+### pkg/hashdir
+
+Contains the hashdir package, this is where most of logic sits.
 
 [Overview]: #overview
 [Installation]: #installation
+[Develop]: #develop
 [cloud-platform-environments]: https://github.com/ministryofjustice/cloud-platform-environments
 [cloud-platform-cli]: https://github.com/ministryofjustice/cloud-platform-cli
 [GitHub action]: https://github.com/ministryofjustice/cloud-platform-environments/tree/main/.github/workflows

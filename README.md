@@ -20,7 +20,7 @@ This diagram shows a simple workflow to address the problem:
 
 ![workflow diagram](https://raw.githubusercontent.com/ministryofjustice/cloud-platform-directory-hash/main/docs/workflow2.png)
 
-1. It was decided very early on, the best way to ensure the integrity of a newly created namespace was to form a hash of its contents. This hash would then need to be passed to a PR and some further logic would apply to confirm its validity. Because the Cloud Platform team have already created a command line interface (CLI) tool to template onboarding to the platform, it became evident that the initial hash upon creation should be performed by this tool. The hash would then be added to the PR via an artefact in the root of the [cloud-platform-environment] repository.
+1. It was decided very early on, the best way to ensure the integrity of a newly created namespace was to form a hash of its contents. This hash would then need to be passed to a PR and some further logic would apply to confirm its validity. Because the Cloud Platform team have already created a command line interface (CLI) tool to template onboarding to the platform, it became evident that the initial hash upon creation should be performed by this tool. The hash would then be added to the PR via an artefact in the root of the [cloud-platform-environments] repository.
 
 2. Upon raising a pull request a [GitHub action] would trigger. This action would simply checkout the relevant branch, perform a check and display its output. It was extremely important not to fail the GitHub action if the check did not pass. This is due to the nature of GitHub actions. Upon failure (an exit 1 as an example) GitHub wil display a hideous red "x" next to all failed commits, and as the majority of pull requests would not auto-apply, this seemed unnecessary.
 
@@ -36,6 +36,17 @@ This diagram shows a simple workflow to address the problem:
 
 7. If the preceding steps are true, the user can merge the code into main. However, a Cloud Platform engineer will need to review if they're false.
 
+## Installation
+
+The tool was designed for use in a [GitHub action]. To execute you must be inside the [cloud-platform-environments] repository and there must be a file called `.checksum`.
+
+```
+go get github.com/ministryofjustice/cloud-platform-directory-hash/cmd/directory-hash@main
+```
 
 
-[create a repository]: https://github.com/ministryofjustice/template-repository/generate
+[Overview]: #overview
+[Installation]: #installation
+[cloud-platform-environments]: https://github.com/ministryofjustice/cloud-platform-environments
+[cloud-platform-cli]: https://github.com/ministryofjustice/cloud-platform-cli
+[GitHub action]: https://github.com/ministryofjustice/cloud-platform-environments/tree/main/.github/workflows

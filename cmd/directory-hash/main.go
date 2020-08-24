@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	dir "github.com/ministryofjustice/cloud-platform-directory-hash/pkg/hashdir"
+	"github.com/sethvargo/go-githubactions"
 	create "golang.org/x/mod/sumdb/dirhash"
 )
 
@@ -32,11 +33,13 @@ func main() {
 	// returns exit code 0 regardless of pass or fail to allow GitHub actions to report success.
 	if dir.HashesMatch(prevHash, newHash) && dir.SingleNamespace(namespace, base) {
 		fmt.Println("Checksums match. Approve PR.")
-		err := dir.CreateArtifact("pass")
-		if err != nil {
-			fmt.Println(err)
-		}
+		githubactions.SetOutput("checksum_match", "true")
+		// err := dir.CreateArtifact("pass")
+		// if err != nil {
+		// 	fmt.Println(err)
+		// }
 	} else {
 		fmt.Println("Checksums do not match. Aborting.")
+		githubactions.SetOutput("checksum_match", "false")
 	}
 }

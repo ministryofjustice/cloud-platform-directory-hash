@@ -1,0 +1,5 @@
+name: Directory-hash
+
+runs:
+  using: docker
+  image: Dockerfile

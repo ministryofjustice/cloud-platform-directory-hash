@@ -34,10 +34,6 @@ func main() {
 	if dir.HashesMatch(prevHash, newHash) && dir.SingleNamespace(namespace, base) {
 		fmt.Println("Checksums match. Approve PR.")
 		githubactions.SetOutput("checksum_match", "true")
-		// err := dir.CreateArtifact("pass")
-		// if err != nil {
-		// 	fmt.Println(err)
-		// }
 	} else {
 		fmt.Println("Checksums do not match. Aborting.")
 		githubactions.SetOutput("checksum_match", "false")

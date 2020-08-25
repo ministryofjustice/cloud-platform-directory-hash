@@ -12,6 +12,12 @@ const fileName string = ".checksum"
 const base string = "namespaces/live-1.cloud-platform.service.justice.gov.uk"
 
 func main() {
+	prChanges := githubactions.GetInput("prChanges")
+	if prChanges == "" {
+		githubactions.Fatalf("GitHub action has not recognised any changes.")
+	}
+
+	fmt.Println(prChanges)
 	// DefaultHash is the default hash function used to hash a directory.
 	var DefaultHash create.Hash = create.Hash1
 
@@ -31,7 +37,7 @@ func main() {
 	// If both conditions have been met a file will be created for a downstream GitHub
 	// action. If the conditions fail, a message will be printed. The script deliberately
 	// returns exit code 0 regardless of pass or fail to allow GitHub actions to report success.
-	if dir.HashesMatch(prevHash, newHash) && dir.SingleNamespace(namespace, base) {
+	if dir.HashesMatch(prevHash, newHash) {
 		fmt.Println("Checksums match. Approve PR.")
 		githubactions.SetOutput("checksum_match", "true")
 	} else {

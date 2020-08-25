@@ -1,6 +1,6 @@
 name: Directory-hash
 inputs:
-  prChanges: Array of changed files
+  prChanges: 'Changed files'
 
 runs:
   using: docker

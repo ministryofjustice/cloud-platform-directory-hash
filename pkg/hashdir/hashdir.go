@@ -19,7 +19,8 @@ func ReadChecksum(f string) (userHash, namespace string) {
 	// If the checksum file doesn't exit, exit cleanly ensuring GitHub
 	// actions remain green.
 	if _, err := os.Stat(f); os.IsNotExist(err) {
-		fmt.Printf("File does not exist\n")
+		fmt.Println("Checksum file doesn't exist")
+		os.Exit(0)
 	}
 
 	file, err := os.Open(f)

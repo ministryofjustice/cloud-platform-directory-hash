@@ -16,6 +16,12 @@ import (
 // This file contains a namespace name and its sha256 hash. Both of these
 // will be returned as a string.
 func ReadChecksum(f string) (userHash, namespace string) {
+	// If the checksum file doesn't exit, exit cleanly ensuring GitHub
+	// actions remain green.
+	if _, err := os.Stat(f); os.IsNotExist(err) {
+		fmt.Printf("File does not exist\n")
+	}
+
 	file, err := os.Open(f)
 	if err != nil {
 		fmt.Println(err)

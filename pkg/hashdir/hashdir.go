@@ -6,6 +6,7 @@ package hashdir
 import (
 	"bufio"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -59,14 +60,14 @@ func ValidateNamespace(ns, base string) (bool, error) {
 	r := checkNamespaceChange(ns, s)
 	if !r {
 		fmt.Println("Was expecting", ns, "but received", s)
-		return false, err
+		return false, errors.New("Didn't receive correct namspace")
 	}
 
 	// Checks if there is only one namespace per PR.
 	t := checkSingleNamespace(s)
 	if !t {
 		fmt.Println("There are", len(s), "namespaces in this PR:", s)
-		return false, err
+		return false, errors.New("There are too many namespaces in this PR")
 	}
 
 	return true, nil

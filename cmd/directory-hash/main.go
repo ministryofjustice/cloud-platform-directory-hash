@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	dir "github.com/ministryofjustice/cloud-platform-directory-hash/pkg/hashdir"
 	"github.com/sethvargo/go-githubactions"
@@ -24,20 +25,24 @@ func main() {
 	// Creates a new sha256 hash of a namespace.
 	newHash, err := create.HashDir(nsDir, namespace, DefaultHash)
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Failed to create hash, reason:", err)
+	}
+
+	// Confirms expected namespace is the only namespace changed in PR.
+	_, err = dir.ValidateNamespace(namespace, base)
+	if err != nil {
+		fmt.Println("Failed to validate namespace, reason:", err)
+		// Fail softly as to allow GitHub actions to report success.
+		os.Exit(0)
 	}
 
 	// Compares two hashes and ensures only a single namespace has been modified.
 	// If both conditions have been met a file will be created for a downstream GitHub
 	// action. If the conditions fail, a message will be printed. The script deliberately
 	// returns exit code 0 regardless of pass or fail to allow GitHub actions to report success.
-	if dir.HashesMatch(prevHash, newHash) && dir.SingleNamespace(namespace, base) {
+	if dir.HashesMatch(prevHash, newHash) {
 		fmt.Println("Checksums match. Approve PR.")
 		githubactions.SetOutput("checksum_match", "true")
-		// err := dir.CreateArtifact("pass")
-		// if err != nil {
-		// 	fmt.Println(err)
-		// }
 	} else {
 		fmt.Println("Checksums do not match. Aborting.")
 		githubactions.SetOutput("checksum_match", "false")

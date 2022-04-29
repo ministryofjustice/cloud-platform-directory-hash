@@ -10,7 +10,7 @@ import (
 )
 
 const fileName string = ".checksum"
-const base string = "namespaces/live-1.cloud-platform.service.justice.gov.uk"
+const base string = "namespaces/live.cloud-platform.service.justice.gov.uk"
 
 func main() {
 	// DefaultHash is the default hash function used to hash a directory.

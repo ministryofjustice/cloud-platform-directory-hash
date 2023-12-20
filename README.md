@@ -45,7 +45,7 @@ go get github.com/ministryofjustice/cloud-platform-directory-hash/cmd/directory-
 
 ## Develop
 
-You will need golang installed (version 1.14 or greater)
+You will need golang installed (version 1.19 or greater)
 
 ### cmd/directory-hash
 

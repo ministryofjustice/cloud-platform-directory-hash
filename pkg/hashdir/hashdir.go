@@ -8,7 +8,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strings"
 )
@@ -60,14 +59,14 @@ func ValidateNamespace(ns, base string) (bool, error) {
 	r := checkNamespaceChange(ns, s)
 	if !r {
 		fmt.Println("Was expecting", ns, "but received", s)
-		return false, errors.New("Didn't receive correct namspace")
+		return false, errors.New("didn't receive correct namspace")
 	}
 
 	// Checks if there is only one namespace per PR.
 	t := checkSingleNamespace(s)
 	if !t {
 		fmt.Println("There are", len(s), "namespaces in this PR:", s)
-		return false, errors.New("There are too many namespaces in this PR")
+		return false, errors.New("there are too many namespaces in this PR")
 	}
 
 	return true, nil
@@ -81,7 +80,7 @@ func createArray(ns, base string) (s []string, err error) {
 	jsonFile := os.Getenv("HOME") + "/files.json"
 	var arr []string
 
-	f, err := ioutil.ReadFile(jsonFile)
+	f, err := os.ReadFile(jsonFile)
 	if err != nil {
 		return arr, err
 	}

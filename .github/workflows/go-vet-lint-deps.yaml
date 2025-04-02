@@ -18,7 +18,7 @@ jobs:
       # Install Go on the VM running the action.
       - uses: actions/setup-go@0c52d547c9bc32b1aa3301fd7a9cb496313a4491 # v5.0.0
         with:
-          go-version: "1.19.x"
+          go-version: "1.21.x"
 
       - name: Perform staticcheck on codebase
         uses: dominikh/staticcheck-action@ba605356b4b29a60e87ab9404b712f3461e566dc # v1.3.0

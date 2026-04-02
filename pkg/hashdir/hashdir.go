@@ -28,7 +28,7 @@ func ReadChecksum(f string) (userHash, namespace string) {
 		fmt.Println(err)
 	}
 
-	defer file.Close()
+	defer func() { _ = file.Close() }()
 
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)

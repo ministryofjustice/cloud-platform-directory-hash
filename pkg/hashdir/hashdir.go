@@ -1,6 +1,6 @@
 // Package hashdir will compare two directory hashes and
 // perform an action on the outcome. It is intended to be used
-// in a GitHub action
+// in a GitHub action.
 package hashdir
 
 import (
